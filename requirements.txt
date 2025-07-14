@@ -1,0 +1,14 @@
+boto3==1.39.4
+botocore==1.39.4
+charset-normalizer==3.4.2
+jmespath==1.0.1
+numpy==2.3.1
+pandas==2.3.1
+pillow==11.3.0
+python-dateutil==2.9.0.post0
+pytz==2025.2
+reportlab==4.4.2
+s3transfer==0.13.0
+six==1.17.0
+tzdata==2025.2
+urllib3==2.5.0

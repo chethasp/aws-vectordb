@@ -4,34 +4,26 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 from reportlab.lib.styles import getSampleStyleSheet
 import os
 
-# Configuration
-csv_file = 'ticket_data.csv'  # Path to your CSV file
-output_dir = 'pdfs'  # Subfolder to save PDFs
-os.makedirs(output_dir, exist_ok=True)  # Create pdfs subfolder if it doesn't exist
-
-# Read CSV and select first 30 columns
-# Limit to first 15 rows as well
+csv_file = 'ticket_data.csv' 
+output_dir = 'pdfs' 
+os.makedirs(output_dir, exist_ok=True) 
 
 df = pd.read_csv(csv_file)
-df = df.head(15)  # Limit to first 15 rows
-columns = df.columns[:30]  # Limit to first 30 columns
+df = df.head(15)  # limit to first 15 rows
+columns = df.columns[:30]  # limit to first 30 columns
 
-# Set up ReportLab styles
 styles = getSampleStyleSheet()
 style = styles['Normal']
 
-# Generate a PDF for each row
 for index, row in df.iterrows():
     pdf_name = os.path.join(output_dir, f'ticket_{row["Issue id"]}.pdf')
     doc = SimpleDocTemplate(pdf_name, pagesize=letter)
     story = []
     
-    # Add each column value as a paragraph
     for col in columns:
         text = f"{col}: {row[col]}"
         story.append(Paragraph(text, style))
-        story.append(Spacer(1, 12))  # Add spacing between lines
-    
-    # Build and save the PDF
+        story.append(Spacer(1, 12))  
+
     doc.build(story)
     print(f"Generated {pdf_name}")
